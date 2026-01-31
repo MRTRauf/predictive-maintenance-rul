@@ -82,7 +82,20 @@ This is a benchmark proxy dataset, so performance may not reflect real operation
 
 ## Dashboard preview
 
-Add screenshots to `docs/` and update the links below if you want a visual preview.
+### Fleet triage
+Risk bucket filtering and exportable alert list:
 
-![Fleet view](docs/dashboard_fleet.png)
-![Unit view](docs/dashboard_unit.png)
+![Fleet overview table](docs/dashboard_fleet_table.png)
+
+Predicted RUL at last cycle by unit:
+
+![Fleet overview chart](docs/dashboard_fleet_chart.png)
+
+### Unit investigation
+Predicted RUL trajectory for a selected unit:
+
+![Unit detail trend](docs/dashboard_unit_trend.png)
+
+Driver proxies (z-scores) and last-cycle sensor snapshot:
+
+![Unit detail drivers](docs/dashboard_unit_drivers.png)
