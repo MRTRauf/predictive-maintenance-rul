@@ -1,0 +1,13 @@
+pandas
+numpy
+pyarrow>=23.0.0
+scikit-learn
+pydantic
+typer
+rich
+requests
+duckdb
+streamlit
+plotly
+matplotlib
+pytest

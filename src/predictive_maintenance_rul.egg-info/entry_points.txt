@@ -1,0 +1,2 @@
+[console_scripts]
+pm-rul = pm_rul.cli:app
