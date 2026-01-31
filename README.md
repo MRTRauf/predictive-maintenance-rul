@@ -2,6 +2,11 @@
 
 Predictive-maintenance-rul is a reproducible baseline pipeline for Remaining Useful Life (RUL) modeling using NASA CMAPSS FD001. It covers ingestion, training, and a Streamlit dashboard for triage, with exportable alerts and a lightweight model card. This repository is designed for learning and experimentation rather than production deployment.
 
+## Live Demo
+Streamlit app:
+
+https://pred-maintenance-rul-rauf.streamlit.app/
+
 ## Key outputs
 
 - Cleaned, windowed CMAPSS FD001 training and test datasets
