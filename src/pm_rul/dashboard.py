@@ -48,16 +48,33 @@ def _load_artifacts(artifact_dir: Path) -> dict:
 
 
 def _load_dataset(project_root: Path, subset: str) -> tuple[pd.DataFrame, pd.DataFrame]:
-    base = project_root / "data" / "processed" / "cmapss"
-    train_path = base / f"train_{subset}.parquet"
-    test_path = base / f"test_{subset}.parquet"
+    demo_base = project_root / "demo_assets" / "cmapss"
+    local_base = project_root / "data" / "processed" / "cmapss"
 
-    _require_path(train_path)
-    _require_path(test_path)
+    demo_train = demo_base / f"train_{subset}.parquet"
+    demo_test = demo_base / f"test_{subset}.parquet"
+    local_train = local_base / f"train_{subset}.parquet"
+    local_test = local_base / f"test_{subset}.parquet"
 
-    train_df = pd.read_parquet(train_path)
-    test_df = pd.read_parquet(test_path)
-    return train_df, test_df
+    if demo_train.exists() and demo_test.exists():
+        train_df = pd.read_parquet(demo_train)
+        test_df = pd.read_parquet(demo_test)
+        return train_df, test_df
+
+    if local_train.exists() and local_test.exists():
+        train_df = pd.read_parquet(local_train)
+        test_df = pd.read_parquet(local_test)
+        return train_df, test_df
+
+    st.error(
+        "Missing datasets. Expected demo paths: "
+        f"{demo_train} and {demo_test}. "
+        "Expected local-generated paths: "
+        f"{local_train} and {local_test}. "
+        "Generate locally with: python -m pm_rul ingest-cmapss --subset FD001 "
+        "then python -m pm_rul train-baseline --subset FD001 --window 30."
+    )
+    st.stop()
 
 
 def _dataset_stats(df: pd.DataFrame) -> dict:
@@ -176,7 +193,7 @@ def main() -> None:
 
     st.sidebar.header("Artifacts")
     subset = st.sidebar.selectbox("Subset", ["FD001", "FD002", "FD003", "FD004"], index=0)
-    artifact_dir_input = st.sidebar.text_input("Artifact path", "artifacts/baseline_fd001_w30")
+    artifact_dir_input = st.sidebar.text_input("Artifact path", "demo_assets/baseline_fd001_w30")
     load_clicked = st.sidebar.button("Load artifacts")
 
     if "artifacts" not in st.session_state:
