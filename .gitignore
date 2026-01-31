@@ -12,3 +12,11 @@ artifacts/
 *.parquet
 *.joblib
 
+
+!demo_assets/
+!demo_assets/**
+!demo_assets/**/*.joblib
+!demo_assets/**/*.parquet
+!demo_assets/**/*.csv
+!demo_assets/**/*.json
+
